@@ -57,36 +57,22 @@ resource "aws_api_gateway_integration" "lambda" {
   uri                     = var.lambda_invoke_arn
 }
 
-# Svara med 200 OK från vår mock
-resource "aws_api_gateway_method_response" "response_200" {
-  rest_api_id = aws_api_gateway_rest_api.this.id
-  resource_id = aws_api_gateway_resource.notes.id
-  http_method = aws_api_gateway_method.notes_get.http_method
-  status_code = "200"
-}
 
-resource "aws_api_gateway_integration_response" "mock_integration_response" {
-  rest_api_id = aws_api_gateway_rest_api.this.id
-  resource_id = aws_api_gateway_resource.notes.id
-  http_method = aws_api_gateway_method.notes_get.http_method
-  status_code = aws_api_gateway_method_response.response_200.status_code
-
-  # RÄTTELSE HÄR: Ändrat från request_templates till response_templates
-  response_templates = {
-    "application/json" = "{\"message\": \"Hello from behind a secure gateway!\"}"
-  }
-}
 
 # 6. Driftsätt API:et (Deployment + Stage)
 resource "aws_api_gateway_deployment" "this" {
-  depends_on  = [aws_api_gateway_integration.lambda] # Ändrad till lambda
+  depends_on  = [aws_api_gateway_integration.lambda]
   rest_api_id = aws_api_gateway_rest_api.this.id
+
+  # Detta tvingar API Gateway att faktiskt driftsätta dina ändringar live!
+  triggers = {
+    redeployment = sha256(jsonencode(aws_api_gateway_integration.lambda))
+  }
 
   lifecycle {
     create_before_destroy = true
   }
 }
-
 resource "aws_api_gateway_stage" "prod" {
   deployment_id = aws_api_gateway_deployment.this.id
   rest_api_id   = aws_api_gateway_rest_api.this.id

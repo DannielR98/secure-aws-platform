@@ -42,17 +42,21 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 
 # 4. Skapa själva Lambda-funktionen
 resource "aws_lambda_function" "this" {
+  # Ändra till data-källans dynamiska sökväg
   filename         = data.archive_file.lambda_zip.output_path
+  
+  # Ändra till data-källans inbyggda base64-hash-funktion
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+
   function_name    = "secure-api-backend"
   role             = aws_iam_role.lambda_role.arn
-  handler          = "index.handler" # Filnamn.Funktionsnamn
+  handler          = "index.handler" 
   runtime          = "python3.11"
 
   environment {
     variables = {
       ENV            = "Production"
-      DYNAMODB_TABLE = var.dynamodb_table_name # <--- Skickas in till Python-koden
+      DYNAMODB_TABLE = var.dynamodb_table_name
     }
   }
 }
