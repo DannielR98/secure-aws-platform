@@ -63,9 +63,8 @@ Detta projekt demonstrerar en modern, serverlös backend-arkitektur på AWS, hel
 **Terraform** är ett verktyg för *Infrastructure as Code (IaC)*. Istället för att klicka runt i AWS-konsolen manuellt för att skapa databaser, servrar och användare, skriver vi vår infrastruktur i form av konfigurationsfiler. 
 
 ### Varför är detta viktigt?
-* **Inga mänskliga misstag:** Man riskerar inte att glömma att klicka i en viktig säkerhetsinställning.
-* **Återanvändbarhet:** Du kan radera hela din AWS-miljö på en sekund och bygga upp den exakt likadant igen med ett enda kommando.
-* **Historik:** Eftersom infrastrukturen är kod kan den versionshanteras med Git (exakt som vanlig mjukvara).
+* **Återanvändbarhet:** Lätt att bygga upp den igen
+* **Historik:** kan versionshantera
 
 ---
 
