@@ -58,6 +58,9 @@ Detta projekt demonstrerar en modern, serverlös backend-arkitektur på AWS, hel
 
 ---
 
+<img width="1472" height="1240" alt="bild" src="https://github.com/user-attachments/assets/f21e5060-d973-4fb3-9538-d6efa9cdc8e2" />
+
+
 ## Terraform?
 
 **Terraform** är ett verktyg för *Infrastructure as Code (IaC)*. Istället för att klicka runt i AWS-konsolen manuellt för att skapa databaser, servrar och användare, skriver vi vår infrastruktur i form av konfigurationsfiler. 
