@@ -50,6 +50,7 @@ Vi använder vårt id token med vårt curl kommando och om den är äkta släppe
 Då kommer vi till lambdafunktionen, lambdafunktionen python börjar köras. Lambda har en iam roll (som vi gav den via terraform) så den behöver inget lösenord för att öppna databasen 
 
 
+Resten av delen är skriven mer i detalj med ai, skrev bara denna del för att jag själv ska förstå vad som händer
 
 
 # Säkrad AWS API-Plattform (Infrastructure as Code)
